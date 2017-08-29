@@ -7,10 +7,11 @@ $(document).ready(function() {
  
     // DataTable
     var table = $('#table').DataTable( {
-    	"oLanguage": {
-    		"sZeroRecords": "Sorry, no matching datasets found!"
+    		"oLanguage": {
+    			"sZeroRecords": "Sorry, no matching datasets found!",
+    			"sSearch" : "Advanced Search"
     		}
-    		} );
+    	});
  
     // Apply the search
     table.columns().every( function () {
@@ -22,6 +23,6 @@ $(document).ready(function() {
                     .search( this.value )
                     .draw();
             }
-        } );
+        });
     } );
 } );

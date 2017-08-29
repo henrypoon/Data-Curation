@@ -10,32 +10,37 @@
     <meta http-equiv="Pragma" content="no-cache"> 
     <meta http-equiv="Cache-Control" content="no-cache"> 
     <meta http-equiv="Expires" content="Sat, 01 Dec 2001 00:00:00 GMT">
-    <link href="<c:url value="static/css/style.css" />" rel="stylesheet">
+     <link href="../../static/css/style.css" rel="stylesheet" type="text/css">
     
     <title>Home</title>
 </head>
 <body>
 
 	<jsp:include page="NavBar.jsp"/>
-	<h1>Result</h1>
-
 	<div class="container">
-		<div class="panel-group" id="accordion1">
-	    <c:forEach var="result" items="${results}">
+		<div class="panel-group">
 	        <div class="panel panel-default">
 	          <div class="panel-heading">
-	            <h5 class="panel-title">
-	              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#accordion1_${result.getId()}">${result.getHeadline()}</a>
+	            <h5 class="panel-title text-center">
+	              <p1>${record.getHeadline()}</p1>
 	            </h5>
 	          </div>
-	          <div id="accordion1_${result.getId()}" class="panel-collapse collapse">
+	          <div class="panel-collapse">
 	            <div class="panel-body">
-	              <p>${result.getContent()}</p>
+	             	<span class="label label-primary">ID: ${record.getId()}</span>
+	              	<span class="label label-primary">Agency: ${record.getAgency()}</span>
+	              	<span class="label label-primary"><a href="${record.getAddress()}" style="color:inherit;">${record.getAddress()}</a></span>
+            			<p>${record.getContent()}</p>
+            			<div class="btn-group pull-right" role="group" aria-label="...">
+					  <button type="button" class="btn btn-default">Extract Keywords</button>
+					  <button type="button" class="btn btn-default">Extract People</button>
+					  <button type="button" class="btn btn-default">Extract Organizations</button>
+					  <button type="button" class="btn btn-default">Extract Locations</button>
+					</div>
 	            </div>
 	          </div>
 	        </div>
-	    </c:forEach>
-	  </div>
+		</div>
 	</div>
 
 </body>

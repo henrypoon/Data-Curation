@@ -19,17 +19,24 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<div role="navigation">
-		<div class="navbar navbar-inverse">
-			<div class="navbar-collapse collapse">
-				<ul class="nav navbar-nav">
-					<li><a href="/">Home</a></li>
-					<li><a href="search">Search</a></li>
-					<li><a href="<c:url value='/2' />">Sitemap</a></li>
-					<li><a href="all-tasks">Contact Us</a></li>
-				</ul>
-			</div>
+	<nav class="navbar navbar-inverse">
+		<div class="navbar-collapse collapse">
+			<ul class="nav navbar-nav">
+				<li><a href="/">Home</a></li>
+				<li><a href="/search">Search</a></li>
+				<li><a href="/contact">Contact Us</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+		        <li class="dropdown">
+		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sitemap <span class="caret"></span></a>
+		          <ul class="dropdown-menu">
+		            <li><a href="/">Home</a></li>
+		            <li><a href="/search">Search</a></li>
+					<li><a href="/contact">Contact Us</a></li>
+		          </ul>
+		        </li>
+		      </ul>
 		</div>
-	</div>
+	</nav>
 </body>
 </html>

@@ -71,4 +71,13 @@ public class Parser {
 		return result;
 	}
 	
+	public Row searchById(int id) {
+		for (Row r: this.records) {
+			if (Integer.parseInt(r.getId()) == id) {
+				return r;
+			}
+		}
+		return null;
+	}
+	
 }

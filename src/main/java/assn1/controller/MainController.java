@@ -45,48 +45,59 @@ public class MainController {
 	}	
 	
 
-    @RequestMapping(value = "/search", method = 
-	    RequestMethod.GET)
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
     public String printWelcome(@ModelAttribute("Row") Row row, BindingResult result,ModelMap model, HttpServletRequest 
 	    request, HttpServletResponse response) {
-	
-    	return "search";
+    		request.setAttribute("records", recordService.getAllRecords());
+    		return "search";
 
     }
-
-    @RequestMapping(value = "/springPaginationDataTables.web", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody String springPaginationDataTables(HttpServletRequest  request) throws IOException {
-		
-	    	//Fetch the page number from client
-	    	Integer pageNumber = 0;
-	    	if (null != request.getParameter("iDisplayStart"))
-	    		pageNumber = (Integer.valueOf(request.getParameter("iDisplayStart"))/10)+1;		
-	    	
-	    	//Fetch search parameter
-	    	String searchParameter = request.getParameter("sSearch");
-	    	
-	    	//Fetch Page display length
-	    	Integer pageDisplayLength = Integer.valueOf(request.getParameter("iDisplayLength"));
-	    	System.out.println(pageNumber);
-	    	
-	    	//Create page list data
-	    	List<Row> recordList = recordService.getRandom(100);
-	    	int totalPages = 100/pageDisplayLength;
-	    	recordList = recordList.subList(pageNumber*pageDisplayLength, (pageNumber+1)*pageDisplayLength);
-		
-		
-		
-		RowJsonObject RowJsonObject = new RowJsonObject();
-		//Set Total display record
-		RowJsonObject.setiTotalDisplayRecords(recordService.getRandom(100).size());
-		//Set Total record
-		RowJsonObject.setiTotalRecords(recordService.getRandom(100).size());
-		RowJsonObject.setAaData(recordList);
-		
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		String json2 = gson.toJson(RowJsonObject);
-	
-		return json2;
+    
+    @RequestMapping(value = "/result/{id}", method = RequestMethod.GET)
+    public String resultDetails(@PathVariable String id, HttpServletRequest request) {
+    		request.setAttribute("record", recordService.searchById(Integer.parseInt(id)));
+    		return "result";
     }
+    
+    @RequestMapping(value = "/contact", method = RequestMethod.GET)
+    public String resultDetails(HttpServletRequest request) {
+    		return "ContactUs";
+    }
+
+//    @RequestMapping(value = "/springPaginationDataTables.web", method = RequestMethod.GET, produces = "application/json")
+//    public @ResponseBody String springPaginationDataTables(HttpServletRequest  request) throws IOException {
+//		
+//	    	//Fetch the page number from client
+//	    	Integer pageNumber = 0;
+//	    	if (null != request.getParameter("iDisplayStart"))
+//	    		pageNumber = (Integer.valueOf(request.getParameter("iDisplayStart"))/10)+1;		
+//	    	
+//	    	//Fetch search parameter
+//	    	String searchParameter = request.getParameter("sSearch");
+//	    	
+//	    	//Fetch Page display length
+//	    	Integer pageDisplayLength = Integer.valueOf(request.getParameter("iDisplayLength"));
+//	    	
+//	    	System.out.println(searchParameter);
+//	    	
+//	    	//Create page list data
+//	    	List<Row> recordList = recordService.getRandom(100);
+//	    	int totalPages = 100/pageDisplayLength;
+//	    	recordList = recordList.subList(pageNumber*pageDisplayLength, (pageNumber+1)*pageDisplayLength);
+//		
+//		
+//		
+//		RowJsonObject RowJsonObject = new RowJsonObject();
+//		//Set Total display record
+//		RowJsonObject.setiTotalDisplayRecords(recordService.getRandom(100).size());
+//		//Set Total record
+//		RowJsonObject.setiTotalRecords(recordService.getRandom(100).size());
+//		RowJsonObject.setAaData(recordList);
+//		
+//		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+//		String json2 = gson.toJson(RowJsonObject);
+//	
+//		return json2;
+//    }
 
 }

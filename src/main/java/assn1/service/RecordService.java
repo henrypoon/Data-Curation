@@ -33,4 +33,8 @@ public class RecordService {
     public ArrayList<Row> searchByField(String key, String content) {
     		return this.recordDao.searchByField(key, content);
     }
+    
+    public Row searchById(int id) {
+    		return this.recordDao.searchById(id);
+    }
 }

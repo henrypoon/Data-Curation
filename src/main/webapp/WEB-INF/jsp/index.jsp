@@ -18,7 +18,7 @@
 
 	<jsp:include page="NavBar.jsp"/>
 	<h1>Records</h1>
-	 <div class="row">
+	 <div class="row" width="70%">
 	    <div id="filter-panel">
 	        <div class="panel panel-default">
 	            <div class="panel-body">
@@ -55,6 +55,9 @@
 	          <div id="accordion1_${record.getId()}" class="panel-collapse collapse">
 	            <div class="panel-body">
 	              <p>${record.getContent()}</p>
+	              <span class="label label-primary">ID: ${record.getId()}</span>
+	              <span class="label label-primary">Agency: ${record.getAgency()}</span>
+	              <span class="label label-primary"><a href="${record.getAddress()}" style="color:inherit;">${record.getAddress()}</a></span>
 	            </div>
 	          </div>
 	        </div>

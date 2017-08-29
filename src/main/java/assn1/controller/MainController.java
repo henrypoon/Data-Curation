@@ -38,8 +38,15 @@ public class MainController {
 	public String home(@RequestParam(value="options", required=false) Integer number, HttpServletRequest request){
 		if (number == null) {
 			request.setAttribute("records", recordService.getRandom(10));
+			request.setAttribute("num", 10);
 		} else {
-			request.setAttribute("records", recordService.getRandom(100));
+			if (number != 0) {
+				request.setAttribute("records", recordService.getRandom(number));
+				request.setAttribute("num", number);
+			} else {
+				request.setAttribute("records", recordService.getAllRecords());
+				request.setAttribute("num", 0);
+			}
 		}
 		return "index";
 	}	

@@ -8,13 +8,16 @@
 </head>
 <body>
 <jsp:include page="NavBar.jsp"/>
-<div class="container">
+<div class="jumbotron vertical-center">
+	<div class="container container-table">
+		<div class="text-center">
+				<h1>Contact Us</h1>
+		</div>
 	<div class="row">
       <div class="col-md-6 col-md-offset-3">
         <div class="well well-sm">
           <form class="form-horizontal" action="" method="post">
           <fieldset>
-            <legend class="text-center">Contact us</legend>
     
             <!-- Name input-->
             <div class="form-group">
@@ -36,7 +39,7 @@
             <div class="form-group">
               <label class="col-md-3 control-label" for="message">Your message</label>
               <div class="col-md-9">
-                <textarea class="form-control" id="message" name="message" placeholder="Please enter your message here..." rows="5"></textarea>
+                <textarea class="form-control" id="message" name="message" placeholder="Please enter your message here" rows="5"></textarea>
               </div>
             </div>
     
@@ -50,6 +53,7 @@
           </form>
         </div>
       </div>
+	</div>
 	</div>
 </div>
 </body>

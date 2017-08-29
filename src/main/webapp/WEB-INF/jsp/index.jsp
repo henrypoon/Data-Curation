@@ -17,53 +17,89 @@
 <body>
 
 	<jsp:include page="NavBar.jsp"/>
-	<h1>Records</h1>
-	 <div class="row" width="70%">
-	    <div id="filter-panel">
-	        <div class="panel panel-default">
-	            <div class="panel-body">
-	                <form class="form-inline" role="form" method="get" action="/">
-	                    <div class="form-group">
-	                        <label class="filter-col" style="margin-right:0;" for="pref-perpage">Rows per page:</label>
-	                        <select id="pref-perpage" class="form-control" name="options">
-	                            <option selected="selected" value="10">10</option>
-	                            <option value="100">100</option>
-	                            <option value="1000">1000</option>
-	                            <option value="all">All</option>
-	                        </select>                                
-	                    </div> <!-- form group [rows] -->
-	                    <div class="form-group">    
-	                        <button type="submit" class="btn btn-default filter-col">
-	                            <span class="glyphicon glyphicon-record"></span> Save Settings
-	                        </button>  
-	                    </div>
-	                </form>
-	            </div>
-	        </div>
-	    </div> 
-	</div> 
-		
-	<div class="container">
-		<div class="panel-group" id="accordion1">
-	    <c:forEach var="record" items="${records}">
-	        <div class="panel panel-default">
-	          <div class="panel-heading">
-	            <h5 class="panel-title">
-	              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#accordion1_${record.getId()}">${record.getHeadline()}</a>
-	            </h5>
-	          </div>
-	          <div id="accordion1_${record.getId()}" class="panel-collapse collapse">
-	            <div class="panel-body">
-	              <p>${record.getContent()}</p>
-	              <span class="label label-primary">ID: ${record.getId()}</span>
-	              <span class="label label-primary">Agency: ${record.getAgency()}</span>
-	              <span class="label label-primary"><a href="${record.getAddress()}" style="color:inherit;">${record.getAddress()}</a></span>
-	            </div>
-	          </div>
-	        </div>
-	    </c:forEach>
-	  </div>
+	<div class="jumbotron vertical-center">
+		<div class="container container-table">
+			<div class="text-center">
+				<h1>Data Curation</h1>
+			</div>
+			<div class="panel panel-primary">
+				<div class="panel-body">
+					 <div class="row">
+		                <form class="form-inline" role="form" method="get" action="/">
+		                    <div class="form-group">
+		                        <label class="filter-col" style="margin-right:0;" for="pref-perpage">Rows to display:</label>
+		                        <select id="pref-perpage" class="form-control" name="options">
+		                        	<c:choose>
+    									<c:when test="${num==10}">
+			                            <option selected="selected" value="10">10</option>
+			                            <option value="100">100</option>
+			                            <option value="1000">1000</option>
+			                            <option value="0">All</option>
+		                            		<br />
+		                            	</c:when>
+   									<c:when test="${num==100}">
+			                            <option value="10">10</option>
+			                            <option selected="selected" value="100">100</option>
+			                            <option value="1000">1000</option>
+			                            <option value="0">All</option>
+		                            		<br />
+		                            	</c:when>
+    	   								<c:when test="${num==1000}">
+			                            <option value="10">10</option>
+			                            <option value="100">100</option>
+			                            <option selected="selected" value="1000">1000</option>
+			                            <option value="0">All</option>
+		                            		<br />
+		                            	</c:when>
+                    	   	   			<c:when test="${num==0}">
+			                            <option value="10">10</option>
+			                            <option value="100">100</option>
+			                            <option value="1000">1000</option>
+			                            <option selected="selected" value="0">All</option>
+		                            		<br />
+		                            	</c:when>
+		                            	<c:otherwise>
+		                            		<option value="10">10</option>
+			                            <option value="100">100</option>
+			                            <option value="1000">1000</option>
+			                            <option value="0">All</option>
+		                            		<br />
+		                            	</c:otherwise>
+		                        </c:choose>
+		                            
+		                        </select>                                
+		                    </div> <!-- form group [rows] -->
+		                    <div class="form-group">    
+		                        <button type="submit" class="btn btn-default filter-col">
+		                            <span class="glyphicon glyphicon-record"></span> Save Settings
+		                        </button>  
+		                    </div>
+		                </form>
+					</div> 
+				</div>
+				<div class="panel-footer">
+					<div class="panel-group" id="accordion1">
+				    <c:forEach var="record" items="${records}">
+				        <div class="panel panel-default">
+				          <div class="panel-heading">
+				            <h5 class="panel-title">
+				              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#accordion1_${record.getId()}">${record.getHeadline()}</a>
+				            </h5>
+				          </div>
+				          <div id="accordion1_${record.getId()}" class="panel-collapse collapse">
+				            <div class="panel-body">
+				              <p>${record.getContent()}</p>
+				              <span class="label label-primary">ID: ${record.getId()}</span>
+				              <span class="label label-primary">Agency: ${record.getAgency()}</span>
+				              <span class="label label-primary"><a href="${record.getAddress()}" style="color:inherit;">${record.getAddress()}</a></span>
+				            </div>
+				          </div>
+				        </div>
+				    </c:forEach>
+				  </div>
+				</div>
+			</div>
+		</div> 
 	</div>
-
 </body>
 </html>

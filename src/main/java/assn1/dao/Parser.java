@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.IntStream;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Repository;
@@ -49,16 +50,16 @@ public class Parser {
 		return this.records;
 	}
 	
-	public ArrayList<Row> getRandom(int number) {
-		int r=0;
-		Random rd = new Random();
+	public ArrayList<Row> getRandom(int totalNumber) {
+		Random random = new Random();
+		ArrayList<Row> resultList = new ArrayList<Row>();
 		int max = this.records.size();
-		ArrayList<Row> result = new ArrayList<Row>();
-		for (int i=0; i<number; i++) {
-			r=rd.nextInt((max-0)+1) + 0;
-			result.add(this.records.get(r));
-		}
-		return result;
+		int min = 1;
+		IntStream stream = random.ints(totalNumber, min, max);
+		stream.forEach((i) -> {
+			resultList.add(this.records.get(i));
+		});
+		return resultList;
 	}
 	
 	public ArrayList<Row> searchByField(String key, String content) {

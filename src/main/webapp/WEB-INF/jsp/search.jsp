@@ -12,9 +12,6 @@
 </head>
 <body>
 <jsp:include page="NavBar.jsp"/>
-<div class="text-center">
-	<h2>Search</h2>
-</div>
 
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
 <script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
@@ -25,6 +22,9 @@
 
 <div class="jumbotron vertical-center">
 	<div class="container container-table">
+		<div class="text-center">
+				<h1>Search</h1>
+		</div>
 		<table width="100%" style="border: 3px;background: rgb(243, 244, 248);"><tr><td>
 			<table id="table" class="display" cellspacing="0" width="100%">
 		        <thead>

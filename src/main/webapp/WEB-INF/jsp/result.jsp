@@ -32,16 +32,112 @@
 	              	<span class="label label-primary"><a href="${record.getAddress()}" style="color:inherit;">${record.getAddress()}</a></span>
             			<p>${record.getContent()}</p>
             			<div class="btn-group pull-right" role="group" aria-label="...">
-					  <button type="button" class="btn btn-default">Extract Keywords</button>
-					  <button type="button" class="btn btn-default">Extract People</button>
-					  <button type="button" class="btn btn-default">Extract Organizations</button>
-					  <button type="button" class="btn btn-default">Extract Locations</button>
+					  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#Keywords">Extract Keywords</button>
+					  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#People">Extract People</button>
+					  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#Organizations">Extract Organizations</button>
+					  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#Locations">Extract Locations</button>
 					</div>
 	            </div>
 	          </div>
 	        </div>
 		</div>
 	</div>
+
+	  <!-- Modal -->
+	  <div class="modal fade" id="Keywords" role="dialog">
+	    <div class="modal-dialog">
+	    
+	      <!-- Modal content-->
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	          <h4 class="modal-title">Extract Keywords</h4>
+	        </div>
+	        <div class="modal-body">
+	         <c:forEach var="r" items="${record.extractKeyword()}">
+	          <span class="badge badge-pill badge-info">${r}</span>
+	         </c:forEach>
+	        </div>
+	        <div class="modal-footer">
+	          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        </div>
+	      </div>
+	      
+	    </div>
+	  </div>
+	  
+	  	  <!-- Modal -->
+	  <div class="modal fade" id="People" role="dialog">
+	    <div class="modal-dialog">
+	    
+	      <!-- Modal content-->
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	          <h4 class="modal-title">Extract People</h4>
+	        </div>
+	        <div class="modal-body">
+	         <c:forEach var="r" items="${record.extractName()}">
+	         	<span class="badge badge-pill badge-info">${r}</span>
+	         </c:forEach>
+	        </div>
+	        <div class="modal-footer">
+	          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        </div>
+	      </div>
+	      
+	    </div>
+	  </div>
+	  
+	  	  <!-- Modal -->
+	  <div class="modal fade" id="Organizations" role="dialog">
+	    <div class="modal-dialog">
+	    
+	      <!-- Modal content-->
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	          <h4 class="modal-title">Extract Organizations</h4>
+	        </div>
+	        <div class="modal-body">
+	         <c:forEach var="r" items="${record.extractOrganizations()}">
+	          <span class="badge badge-pill badge-info">${r}</span>
+	         </c:forEach>
+	        </div>
+	        <div class="modal-footer">
+	          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        </div>
+	      </div>
+	      
+	    </div>
+	  </div>
+	  
+	  
+	  	  <!-- Modal -->
+	  <div class="modal fade" id="Locations" role="dialog">
+	    <div class="modal-dialog">
+	    
+	      <!-- Modal content-->
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	          <h4 class="modal-title">Extract Locations</h4>
+	        </div>
+	        <div class="modal-body">
+	         <c:forEach var="r" items="${record.extractLocations()}">
+	          <span class="badge badge-pill badge-info">${r}</span>
+	         </c:forEach>
+	        </div>
+	        <div class="modal-footer">
+	          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        </div>
+	      </div>
+	      
+	    </div>
+	  </div>
+
+
+
 
 </body>
 </html>

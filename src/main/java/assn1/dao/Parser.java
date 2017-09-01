@@ -1,6 +1,7 @@
 package assn1.dao;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -20,6 +21,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 import assn1.model.Row;
+import unsw.curation.api.domain.ExtractNamedEntity;
+import unsw.curation.api.extractnamedentity.ExtractEntitySentence;
 @Repository
 public class Parser {
 	private Row[] record;
@@ -80,5 +83,6 @@ public class Parser {
 		}
 		return null;
 	}
+	
 	
 }

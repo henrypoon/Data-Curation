@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +28,7 @@ import com.google.gson.GsonBuilder;
 import assn1.model.Row;
 import assn1.model.RowJsonObject;
 import assn1.service.RecordService;
+import unsw.curation.api.extractnamedentity.ExtractEntitySentence;
 
 @Controller
 public class MainController {
@@ -52,12 +54,58 @@ public class MainController {
 	}	
 	
 
-    @RequestMapping(value = "/search", method = RequestMethod.GET)
-    public String printWelcome(@ModelAttribute("Row") Row row, BindingResult result,ModelMap model, HttpServletRequest 
+    @RequestMapping(value = "/resultTable", method = RequestMethod.GET)
+    public String resultTable(@RequestParam("type") String type, @RequestParam("keyword") String keyword, @ModelAttribute("Row") Row row, BindingResult result,ModelMap model, HttpServletRequest 
 	    request, HttpServletResponse response) {
-    		request.setAttribute("records", recordService.getAllRecords());
-    		return "search";
-
+    		ArrayList<Row> res = recordService.searchByField(type, keyword);
+    		if (res == null) {
+    			res = new ArrayList<Row>();
+    		}
+    		request.setAttribute("records", res);
+    		return "resultTable";
+    }
+    
+    
+    @RequestMapping(value = "/resultTableAdv", method = RequestMethod.GET)
+    public String resultTableAdv( 
+    		@RequestParam(value = "agency", required=false) String agency,
+    		@RequestParam(value ="headline", required=false) String headline,
+    		@RequestParam(value ="publish_date", required=false) String publish_date,
+    		@RequestParam(value ="city", required=false) String city,
+    		@RequestParam(value ="address", required=false) String address,
+    		@RequestParam(value ="position", required=false) String position,
+    		@RequestParam(value ="state", required=false) String state,
+    		@RequestParam(value ="content", required=false) String content,
+    		@ModelAttribute("Row") Row row, 
+    		BindingResult result,ModelMap model, HttpServletRequest request, HttpServletResponse response) {
+    			HashMap<String,String> hm=new HashMap<String,String>();  
+    			if (agency != "") {
+    				hm.put("agency", agency);
+    			}
+    			if (headline != "") {
+    				hm.put("headline", headline);
+    			}
+    			if (publish_date != "") {
+    				hm.put("publish_date", publish_date);
+    			}
+    			if (city != "") {
+    				hm.put("city", city);
+    			}
+    			if (address != "") {
+    				hm.put("address", address);
+    			}
+    			if (position != "") {
+    				hm.put("position", position);
+    			}
+    			if (state != "") {
+    				hm.put("state", state);
+    			}
+    			if (content != "") {
+    				hm.put("content", content);
+    			} 			
+    			System.out.println(hm.size());
+    			request.setAttribute("records", null);
+    			return "resultTable";
     }
     
     @RequestMapping(value = "/result/{id}", method = RequestMethod.GET)
@@ -70,6 +118,16 @@ public class MainController {
     public String resultDetails(HttpServletRequest request) {
     		return "ContactUs";
     }
+    
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    public String result(HttpServletRequest request) {
+    		return "search";
+    }
+    
+    
+    
+    
+    
 
 //    @RequestMapping(value = "/springPaginationDataTables.web", method = RequestMethod.GET, produces = "application/json")
 //    public @ResponseBody String springPaginationDataTables(HttpServletRequest  request) throws IOException {

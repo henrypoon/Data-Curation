@@ -1,6 +1,16 @@
 package assn1.model;
 
+import java.io.File;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+
+import unsw.curation.api.domain.ExtractNamedEntity;
+import unsw.curation.api.extractnamedentity.ExtractEntitySentence;
+import unsw.curation.api.tokenization.ExtractionKeywordImpl;
 
 public final class Row {
     @JacksonXmlProperty(localName = "_id", isAttribute = true)
@@ -405,25 +415,78 @@ public final class Row {
 		this.contact4 = contact4;
 	}
 
+	
+	public Collection<String> extractName() {
+		ExtractEntitySentence es = new ExtractEntitySentence();
+		Collection<String> res = new ArrayList<String>();
+		try {
+			List<ExtractNamedEntity> ne = es.ExtractNamedEntitySentence(this.content);
+			for (ExtractNamedEntity e: ne) {
+				res.add(e.word);
+			}
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+	public Collection<String> extractOrganizations() {
+		ExtractEntitySentence es = new ExtractEntitySentence();
+		Collection<String> res = new ArrayList<String>();
+		try {
+			res = es.ExtractOrganization(this.content);
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+
+	public Collection<String> extractLocations() {
+		ExtractEntitySentence es = new ExtractEntitySentence();
+		Collection<String> res = new ArrayList<String>();
+		try {
+			res = es.ExtractLocation(this.content);
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+	
+	
+	public String extractKeyword() {
+		ExtractionKeywordImpl ek = new ExtractionKeywordImpl();
+		String res = null;
+		try {
+			res = ek.ExtractSentenceKeyword(this.content, new File("./src/main/resources/stop-word-list.txt"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
 
 	public Row() {
     	
     }
 	
 	public String Mapping(String field) {
-		if (field == "agency") {
+		if (field.equals("agency")) {
 			return this.agency;
-		} else if (field == "headline") {
+		} else if (field.equals("headline")) {
 			return this.headline;
-		} else if (field == "date") {
-			return this.date_entered;
-		} else if (field == "city") {
+		} else if (field.equals("publish_date")) {
+			return this.publish_date;
+		} else if (field.equals("city")) {
 			return this.city;
-		} else if (field == "position") {
+		} else if (field.equals("position")) {
 			return this.position;
-		} else if (field == "address") {
+		} else if (field.equals("address")) {
 			return this.address;
-		}
+		} else if (field.equals("state")) {
+			return this.state;
+		} 
 		return null;
 	}
 

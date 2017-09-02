@@ -1,17 +1,16 @@
 package assn1.service;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import assn1.dao.Parser;
+import assn1.dao.Records;
 import assn1.model.Row;
 
 @Service
 public class RecordService {
 	@Autowired
-	private Parser recordDao = new Parser();
+	private Records recordDao = new Records();
 
 	public ArrayList<Row> getAllRecords() {
 		return this.recordDao.getAllRecords();
@@ -36,5 +35,9 @@ public class RecordService {
     
     public Row searchById(int id) {
     		return this.recordDao.searchById(id);
+    }
+    
+    public ArrayList<Row> advSearch(HashMap<String,String> hm) {
+    		return this.recordDao.advSearch(hm);
     }
 }

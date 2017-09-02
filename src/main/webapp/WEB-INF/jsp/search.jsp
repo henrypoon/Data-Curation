@@ -14,8 +14,9 @@
 <script type="text/javascript" src="static/js/searchBox.js"></script>
 <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+	<div class="jumbotron vertical-center">
 <form class="form-horizontal" method="GET" action="resultTable">
-<div class="container" >
+<div class="container container-table" >
 		<div class="text-center">
 				<h1>Result</h1>
 		</div>
@@ -85,7 +86,7 @@
                         <label for="contain">Content</label>
                         <input class="form-control" type="text" name="content"/>
                       </div>
-                      <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                      <button type="submit" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                     </form>
                 </div>
             </div>
@@ -97,7 +98,7 @@
         </div>
 	</div>
 </div>
-
+</div>
 
 </body>
 </html>

@@ -4,7 +4,9 @@ import java.io.File;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
@@ -453,8 +455,16 @@ public final class Row {
 		return res;
 	}
 	
-	
-	
+	public boolean match(HashMap<String,String> hm) {
+		Map<String, String> map = hm;
+		for (Map.Entry<String, String> e : map.entrySet()) {
+			if (!Mapping(e.getKey()).contains(e.getValue())) {
+				return false;
+			}
+		}
+		return true;
+	}
+		
 	public String extractKeyword() {
 		ExtractionKeywordImpl ek = new ExtractionKeywordImpl();
 		String res = null;

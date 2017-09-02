@@ -88,10 +88,13 @@
 				          </div>
 				          <div id="accordion1_${record.getId()}" class="panel-collapse collapse">
 				            <div class="panel-body">
+				            	<h4>
 				              <p>${record.getContent()}</p>
 				              <span class="label label-primary">ID: ${record.getId()}</span>
 				              <span class="label label-primary">Agency: ${record.getAgency()}</span>
 				              <span class="label label-primary"><a href="${record.getAddress()}" style="color:inherit;">${record.getAddress()}</a></span>
+				              <span class="label label-info pull-right"><a href="/result/${record.getId()}" style="color:inherit;">Details</a></span>
+				            	</h4>
 				            </div>
 				          </div>
 				        </div>

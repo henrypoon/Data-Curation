@@ -1,14 +1,12 @@
 package assn1.dao;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Random;
 import java.util.stream.IntStream;
 
@@ -21,14 +19,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 import assn1.model.Row;
-import unsw.curation.api.domain.ExtractNamedEntity;
-import unsw.curation.api.extractnamedentity.ExtractEntitySentence;
 @Repository
-public class Parser {
+public class Records {
 	private Row[] record;
 	private ArrayList<Row> records;
 	
-	public Parser() {
+	public Records() {
 		System.out.println("start parsing");
 	    ObjectMapper objectMapper = new XmlMapper();
 	    try {
@@ -74,6 +70,17 @@ public class Parser {
 		}
 		return result;
 	}
+	
+	public ArrayList<Row> advSearch(HashMap<String,String> hm) {
+		ArrayList<Row> result = new ArrayList<Row>();
+		for (Row r: this.records) {
+			if (r.match(hm)) {
+				result.add(r);
+			}
+		}
+		return result;	
+	}
+	
 	
 	public Row searchById(int id) {
 		for (Row r: this.records) {
